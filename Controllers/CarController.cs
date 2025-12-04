@@ -1,0 +1,25 @@
+﻿using CarRentalApi.Application.Services.ServiceInterfaces;
+using Microsoft.AspNetCore.Mvc;
+
+namespace CarRentalApi.Controllers;
+/// <summary>
+/// Car Controller
+/// </summary>
+[ApiController]
+[Route("api/[controller]")]
+public class CarController : Controller
+{
+    private readonly ICarApplicationService _carApplicationService;
+
+    public CarController(ICarApplicationService carApplicationService)
+    {
+        _carApplicationService = carApplicationService;
+    }
+
+    [HttpGet]    
+    public async Task<IActionResult> GetCars()
+    {
+        var cars = await _carApplicationService.GetCars();
+        return Ok(cars);
+    }
+}
