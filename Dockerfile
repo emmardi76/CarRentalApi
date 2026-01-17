@@ -14,6 +14,9 @@ RUN dotnet publish "CarRentalApi.csproj" -c Release -o /app/publish
 FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS runtime
 WORKDIR /app
 
+# Permitir establecer el Environment en build (--build-arg ENVIRONMENT=Development)
+ARG ENVIRONMENT=Production
+ENV ASPNETCORE_ENVIRONMENT=$ENVIRONMENT
 ENV ASPNETCORE_URLS=http://+:80
 ENV DOTNET_RUNNING_IN_CONTAINER=true
 
