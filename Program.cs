@@ -13,6 +13,12 @@ using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
 
+// Explicit configuration order - environment variables override everything
+builder.Configuration
+    .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
+    .AddJsonFile($"appsettings.{builder.Environment.EnvironmentName}.json", optional: true, reloadOnChange: true)
+    .AddEnvironmentVariables(); // This ensures environment variables have highest priority
+
 builder.Services.AddControllers();
 
 builder.Services.AddDbContext<CarRentalContext>(options =>
@@ -51,11 +57,11 @@ builder.Services.AddSwaggerGen();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
+//if (app.Environment.IsDevelopment())
+//{
     app.UseSwagger();
     app.UseSwaggerUI();
-}
+//}
 
 app.UseHttpsRedirection();
 
