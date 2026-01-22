@@ -22,20 +22,4 @@ public class CarController : Controller
         var cars = await _carApplicationService.GetCars();
         return Ok(cars);
     }
-
-    [HttpGet]
-    [Route("Healty")]
-    public async Task<IActionResult> HelathCar()
-    {
-        try
-        { 
-           var cars = await _carApplicationService.GetCars();
-            return  Ok("Healthy");
-        }
-        catch (Exception ex)
-        {
-            return StatusCode(500, $"Unhealthy: {ex.Message}");
-        }        
-      
-    }
 }
