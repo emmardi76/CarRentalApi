@@ -12,16 +12,12 @@ public class CarRepository : BaseRepository, ICarRepository
 
     public async Task<ICollection<Car>> GetCars()
     {
-        _context.Database.CanConnectAsync();
-
         return await _context.Cars
             .Include(c => c.CarType)
             .Include(c => c.CarModel)
             .OrderBy(c => c.Id)
             .ToListAsync();
     }
-
-
 
     public async Task<ICollection<Car>> GetCarsById(List<int> carIds)
     {

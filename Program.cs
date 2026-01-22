@@ -40,12 +40,15 @@ builder.Services.AddSingleton<IMapper>(mapperConfig);
 builder.Services.AddScoped<IRentalRepository, RentalRepository>();
 builder.Services.AddScoped<ICarRepository, CarRepository>();
 builder.Services.AddScoped<ICustomerRepository, CustomerRepository>();
+builder.Services.AddScoped<IHealthRepository, HealthRepository>();
 
 // ApplicationServices
 builder.Services.AddScoped<IRentalApplicationService, RentalApplicationService>();
 builder.Services.AddScoped<ICustomerApplicationService, CustomerApplicationService>();
 builder.Services.AddScoped<ICarApplicationService, CarApplicationService>();
+builder.Services.AddScoped<IHealthApplicationService, HealthApplicationService>();
 
+// Agrega esta directiva using si HealthApplicationService está en este namespace
 // DomainServices
 builder.Services.AddScoped<IRentalDomainService, RentalDomainService>();
 builder.Services.AddScoped<ICustomerDomainService, CustomerDomainService>();
